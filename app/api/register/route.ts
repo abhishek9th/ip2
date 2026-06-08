@@ -24,7 +24,9 @@ export async function POST(request: Request) {
       countryCode: data.countryCode,
       phone: data.phone,
       fullPhone: `${data.countryCode}${data.phone}`,
-      track: data.track,
+      isRealEstateAgent: body.isRealEstateAgent ?? null,
+      yearsOfExperience: body.yearsOfExperience ?? null,
+      hasClosedDeals: body.hasClosedDeals ?? null,
       submittedAt: body.submittedAt ?? new Date().toISOString(),
       source: body.source ?? "landing-page",
     };

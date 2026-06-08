@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle2, Loader2, User, Mail, Phone, Briefcase } from "lucide-react";
+import { CheckCircle2, Loader2, User, Mail, Phone } from "lucide-react";
 import { siteConfig } from "@/lib/config";
 import { FadeUp } from "@/components/motion";
 import {
@@ -121,21 +121,6 @@ export default function LeadForm() {
                     {(errors.phone || errors.countryCode) && (
                       <p className={errorBase}>{errors.phone?.message || errors.countryCode?.message}</p>
                     )}
-                  </div>
-
-                  {/* Track */}
-                  <div>
-                    <label className={labelBase}>
-                      <Briefcase size={12} className="inline mr-1.5 text-[#2F80ED]" />
-                      What&apos;s your track
-                    </label>
-                    <select {...register("track")} className={`${inputBase} cursor-pointer`}>
-                      <option value="">Select your track</option>
-                      {formConfig.tracks.map((t) => (
-                        <option key={t} value={t}>{t}</option>
-                      ))}
-                    </select>
-                    {errors.track && <p className={errorBase}>{errors.track.message}</p>}
                   </div>
 
                   {submitError && (

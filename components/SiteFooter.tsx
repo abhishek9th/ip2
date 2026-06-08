@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { Instagram, Linkedin, Twitter } from "lucide-react";
+import { Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import { siteConfig } from "@/lib/config";
 
 const socialIcons = {
   linkedin: Linkedin,
   twitter: Twitter,
   instagram: Instagram,
+  youtube: Youtube,
 } as const;
 
 function SocialButton({

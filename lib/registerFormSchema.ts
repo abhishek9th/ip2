@@ -5,7 +5,6 @@ export const registerFormSchema = z.object({
   email: z.string().email("Enter a valid email address"),
   countryCode: z.string().min(1, "Select country code"),
   phone: z.string().min(6, "Enter a valid phone number").max(15),
-  track: z.string().min(1, "Enter your track"),
 });
 
 export type RegisterFormData = z.infer<typeof registerFormSchema>;

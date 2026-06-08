@@ -291,6 +291,7 @@ export const siteConfig = {
       { label: "LinkedIn", href: "https://www.linkedin.com/in/parasarora3008/", icon: "linkedin" as const },
       { label: "Twitter", href: "https://x.com/aroraparas3008", icon: "twitter" as const },
       { label: "Instagram", href: "https://www.instagram.com/parasarora_ai", icon: "instagram" as const },
+      { label: "YouTube", href: "https://www.youtube.com/@parasarora_ai", icon: "youtube" as const },
     ],
   },
 
