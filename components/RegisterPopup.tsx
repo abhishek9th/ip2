@@ -11,6 +11,7 @@ import {
   countryFlags,
   type RegisterFormData,
 } from "@/lib/registerFormSchema";
+import { submitRegistration } from "@/lib/submitRegistration";
 
 const labelClass = "block text-gray-600 text-sm mb-1.5";
 const inputClass =
@@ -21,6 +22,7 @@ export default function RegisterPopup() {
   const { form: formConfig } = siteConfig;
   const [open, setOpen] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -40,7 +42,11 @@ export default function RegisterPopup() {
   }, []);
 
   useEffect(() => {
-    const handleOpen = () => setOpen(true);
+    const handleOpen = () => {
+      setSuccess(false);
+      setSubmitError(null);
+      setOpen(true);
+    };
     window.addEventListener("open-register-form", handleOpen);
     return () => window.removeEventListener("open-register-form", handleOpen);
   }, []);
@@ -53,10 +59,17 @@ export default function RegisterPopup() {
     };
   }, [open]);
 
-  const onSubmit = async (_data: RegisterFormData) => {
-    await new Promise((r) => setTimeout(r, 900));
-    setSuccess(true);
-    setTimeout(() => setOpen(false), 2000);
+  const onSubmit = async (data: RegisterFormData) => {
+    setSubmitError(null);
+    try {
+      await submitRegistration(data);
+      setSuccess(true);
+      setTimeout(() => setOpen(false), 3500);
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Something went wrong. Please try again."
+      );
+    }
   };
 
   const close = () => setOpen(false);
@@ -123,10 +136,10 @@ export default function RegisterPopup() {
                   >
                     <CheckCircle2 size={48} className="text-green-500 mx-auto mb-4" />
                     <h3 className="text-[#0B1F3A] text-lg font-extrabold mb-1">
-                      Registration Successful!
+                      You&apos;re Registered!
                     </h3>
                     <p className="text-gray-500 text-sm">
-                      Check your email for the masterclass link.
+                      Your spot is confirmed. Check your email for masterclass details.
                     </p>
                   </motion.div>
                 ) : (
@@ -204,6 +217,10 @@ export default function RegisterPopup() {
                       />
                       {errors.track && <p className={errorClass}>{errors.track.message}</p>}
                     </div>
+
+                    {submitError && (
+                      <p className="text-red-500 text-sm text-center">{submitError}</p>
+                    )}
 
                     <motion.button
                       type="submit"

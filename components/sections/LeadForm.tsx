@@ -4,20 +4,14 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { CheckCircle2, Loader2, User, Mail, Phone, Briefcase } from "lucide-react";
 import { siteConfig } from "@/lib/config";
 import { FadeUp } from "@/components/motion";
-
-const schema = z.object({
-  firstName: z.string().min(2, "First name is required"),
-  email: z.string().email("Enter a valid email address"),
-  countryCode: z.string().min(1, "Select country code"),
-  phone: z.string().min(6, "Enter a valid phone number").max(15),
-  track: z.string().min(1, "Select your track"),
-});
-
-type FormData = z.infer<typeof schema>;
+import {
+  registerFormSchema,
+  type RegisterFormData,
+} from "@/lib/registerFormSchema";
+import { submitRegistration } from "@/lib/submitRegistration";
 
 const inputBase =
   "w-full bg-white border border-[#D8E7FF] text-gray-800 placeholder-gray-400 rounded-xl px-4 py-3 text-sm transition-all duration-200 hover:border-[#2F80ED]/50 focus:border-[#2F80ED] focus:shadow-[0_0_0_3px_rgba(47,128,237,0.12)] outline-none";
@@ -28,19 +22,27 @@ const errorBase = "text-red-500 text-xs mt-1.5";
 export default function LeadForm() {
   const { form: formConfig } = siteConfig;
   const [success, setSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerFormSchema),
     defaultValues: { countryCode: "+91" },
   });
 
-  const onSubmit = async (_data: FormData) => {
-    await new Promise((r) => setTimeout(r, 900));
-    setSuccess(true);
+  const onSubmit = async (data: RegisterFormData) => {
+    setSubmitError(null);
+    try {
+      await submitRegistration(data);
+      setSuccess(true);
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Something went wrong. Please try again."
+      );
+    }
   };
 
   return (
@@ -135,6 +137,10 @@ export default function LeadForm() {
                     </select>
                     {errors.track && <p className={errorBase}>{errors.track.message}</p>}
                   </div>
+
+                  {submitError && (
+                    <p className="text-red-500 text-sm text-center">{submitError}</p>
+                  )}
 
                   {/* Submit */}
                   <motion.button
