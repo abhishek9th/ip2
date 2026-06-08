@@ -281,7 +281,7 @@ export const siteConfig = {
   },
 
   footer: {
-    companyName: "Exponential World AI",
+    companyName: "EstateLabs",
     links: [
       { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Terms of Service", href: "/terms-of-service" },
