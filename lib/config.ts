@@ -280,6 +280,20 @@ export const siteConfig = {
     button: "YES REGISTER ME FOR FREE",
   },
 
+  footer: {
+    companyName: "Exponential World AI",
+    links: [
+      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Terms of Service", href: "/terms-of-service" },
+      { label: "Cookie Policy", href: "/cookie-policy" },
+    ],
+    socialLinks: [
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/parasarora3008/", icon: "linkedin" as const },
+      { label: "Twitter", href: "https://x.com/aroraparas3008", icon: "twitter" as const },
+      { label: "Instagram", href: "https://www.instagram.com/parasarora_ai", icon: "instagram" as const },
+    ],
+  },
+
   form: {
     title: "Register Now",
     subtitle: "For Real Estate Agents",

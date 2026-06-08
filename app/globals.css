@@ -62,6 +62,7 @@
     }
 
     .animate-marquee-ltr,
+    .animate-marquee-announcement,
     .animate-pulse-red,
     .animate-float,
     .animate-orbit-glow {
@@ -321,6 +322,11 @@
 
 .animate-marquee-ltr {
   animation: marquee-ltr 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-announcement {
+  animation: marquee-ltr 22s linear infinite;
   will-change: transform;
 }
 

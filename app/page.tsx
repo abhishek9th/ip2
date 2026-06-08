@@ -15,7 +15,7 @@ import FaqSection from "@/components/sections/FaqSection";
 import RegisterPopup from "@/components/RegisterPopup";
 import ScrollUI from "@/components/ScrollUI";
 import SmoothMotion from "@/components/SmoothMotion";
-import { FadeUp } from "@/components/motion";
+import SiteFooter from "@/components/SiteFooter";
 
 export default function Home() {
   return (
@@ -37,13 +37,7 @@ export default function Home() {
         <TestimonialsSection />
         <FaqSection />
 
-        <FadeUp delay={0.05}>
-          <footer className="bg-[rgb(18,51,50)] border-t border-[rgba(216,231,255,0.08)] py-8 px-4 text-center">
-            <p className="text-gray-500 text-xs">
-              © {new Date().getFullYear()} All rights reserved.
-            </p>
-          </footer>
-        </FadeUp>
+        <SiteFooter />
       </main>
     </SmoothMotion>
   );

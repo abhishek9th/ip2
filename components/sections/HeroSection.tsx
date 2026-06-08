@@ -23,6 +23,32 @@ const RegisterButton3D = dynamic(() => import("@/components/RegisterButton3D"), 
   ),
 });
 
+function AnnouncementMarquee({ text }: { text: string }) {
+  const segment = (
+  <>
+    <Star size={13} className="text-yellow-400 fill-yellow-400 flex-shrink-0" />
+    <span>{text}</span>
+    <Star size={13} className="text-yellow-400 fill-yellow-400 flex-shrink-0" />
+  </>
+  );
+
+  return (
+    <div className="overflow-hidden w-full">
+      <div className="flex w-max animate-marquee-announcement">
+        {[0, 1].map((i) => (
+          <span
+            key={i}
+            className="inline-flex items-center gap-2 px-8 sm:px-12 shrink-0 whitespace-nowrap"
+            aria-hidden={i === 1 ? true : undefined}
+          >
+            {segment}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const masterclassDetails = [
   { icon: CalendarIcon3D, label: "Date", key: "date" as const },
   { icon: ClockIcon3D, label: "Time", key: "time" as const },
@@ -40,13 +66,9 @@ export default function HeroSection() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: smoothEase }}
-        className="bg-[rgb(18,51,50)] text-white text-center py-2.5 px-3 sm:px-4 text-[10px] sm:text-xs md:text-sm font-semibold tracking-wide sm:tracking-wide"
+        className="bg-[#FF2E2E] text-white py-2.5 text-[10px] sm:text-xs md:text-sm font-semibold tracking-wide"
       >
-        <span className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 leading-snug">
-          <Star size={13} className="text-yellow-400 fill-yellow-400 flex-shrink-0" />
-          {siteConfig.announcement}
-          <Star size={13} className="text-yellow-400 fill-yellow-400 flex-shrink-0" />
-        </span>
+        <AnnouncementMarquee text={siteConfig.announcement} />
       </motion.div>
 
       {/* Hero Content */}

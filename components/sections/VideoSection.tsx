@@ -7,7 +7,7 @@ import { FadeUp, smoothEase } from "@/components/motion";
 
 export default function VideoSection() {
   const { video } = siteConfig;
-  const embedSrc = `https://www.youtube.com/embed/${video.youtubeId}?start=${video.startSeconds}&rel=0`;
+  const embedSrc = `https://www.youtube.com/embed/${video.youtubeId}?start=${video.startSeconds}&autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`;
 
   return (
     <section className="perf-section section-light py-10 sm:py-14 px-4 border-y border-[#D8E7FF]">
