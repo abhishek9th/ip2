@@ -11,6 +11,7 @@ import {
   countryFlags,
   type RegisterFormData,
 } from "@/lib/registerFormSchema";
+import { trackMetaPixel } from "@/components/MetaPixel";
 import { submitRegistration } from "@/lib/submitRegistration";
 import RegisterQualification, {
   type QualificationData,
@@ -84,6 +85,7 @@ export default function RegisterPopup() {
     setSubmitError(null);
     try {
       await submitRegistration(data, qualification);
+      trackMetaPixel("Lead");
       setSuccess(true);
       setTimeout(() => setOpen(false), 3500);
     } catch (err) {
